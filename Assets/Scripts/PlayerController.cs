@@ -2,16 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
+using NUnit.Framework.Internal;
 
 public class PlayerController : MonoBehaviour 
 {
     public float speed; 
 
     private Rigidbody2D rb2;
+    private int count;
+    public Text countText;
 
     void Start ()
     {
         rb2 = GetComponent<Rigidbody2D>();
+        count = 0;
+        countText.text = "Score: 0";
     }
 
     void FixedUpdate () 
@@ -20,6 +26,10 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         rb2.AddForce(movement * speed);
+        if (count == 10)
+        {
+            
+        }
     }
 
     void OnTriggerEnter2D (Collider2D other) 
@@ -27,6 +37,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("PickUps"))
         {
             other.gameObject.SetActive (false);
+            count++;
+            countText.text = "Score: " + count.ToString();
         }
     }
 
