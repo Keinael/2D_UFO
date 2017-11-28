@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2;
     private int count;
     public Text countText;
+    public Text winText;
 
     void Start ()
     {
@@ -39,6 +40,10 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive (false);
             count++;
             countText.text = "Score: " + count.ToString();
+        }
+        if (count == 10)
+        {
+            winText.text = "You win this battle...";
         }
     }
 
