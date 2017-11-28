@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour 
 {
@@ -19,6 +20,14 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         rb2.AddForce(movement * speed);
+    }
+
+    void OnTriggerEnter2D (Collider2D other) 
+    {
+        if (other.gameObject.CompareTag("PickUps"))
+        {
+            other.gameObject.SetActive (false);
+        }
     }
 
 }
